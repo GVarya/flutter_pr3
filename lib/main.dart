@@ -55,7 +55,7 @@ class _ScreenSwitcherState extends State<ScreenSwitcher> {
   List<Widget> get screens => [
     LoginScreen(onSave: saveLoginData),
     SignInScreen(onSave: saveSignInData),
-    // DisplayScreen(login: login, password: password),
+    DisplayScreen(login: login, password: password),
     // LoadDataScreen(status: loadStatus, onLoad: () => loadData(0)),
     // AboutAppScreen(),
   ];
@@ -218,5 +218,26 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       ],
     );
+  }
+}
+
+class DisplayScreen extends StatelessWidget {
+  final String login;
+  final String password;
+  const DisplayScreen({required this.login, required this.password});
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Логин:', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          SizedBox(height: 8),
+          Text(login.isEmpty ? 'не задан' : login, style: TextStyle(fontSize: 18)),
+          SizedBox(height: 20),
+          Text('Пароль:', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          SizedBox(height: 8),
+          Text(password.isEmpty ? 'не задан' : password, style: TextStyle(fontSize: 18)),
+        ],
+      );
   }
 }
