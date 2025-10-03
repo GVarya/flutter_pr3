@@ -31,10 +31,10 @@ class _ScreenSwitcherState extends State<ScreenSwitcher> {
   String password = '';
   String loadStatus = 'нет данных';
 
-  void saveLoginData(String l, String p) {
+  void saveLoginData(String lgn, String passwd) {
     setState(() {
-      login = l;
-      password = p;
+      login = lgn;
+      password = passwd;
     });
   }
 
@@ -57,7 +57,7 @@ class _ScreenSwitcherState extends State<ScreenSwitcher> {
     SignInScreen(onSave: saveSignInData),
     DisplayScreen(login: login, password: password),
     LoadDataScreen(status: loadStatus, onLoad: () => loadData(0)),
-    // AboutAppScreen(),
+    AboutAppScreen(),
   ];
 
   @override
@@ -263,3 +263,60 @@ class LoadDataScreen extends StatelessWidget {
   }
 }
 
+class AboutAppScreen extends StatelessWidget {
+  const AboutAppScreen();
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Text(
+                'Задание на практическую работу',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Text(
+                'Необходимо подготовить приложение, позволяющее производить смену контента на экране.',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Text(
+                'Приложение должно содержать минимум 5 отдельных виджета с контентом экрана, а также они должны быть все связаны логически.',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.deepPurple,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Text(
+                'Студенту требуется выполнить все пункты в плане практической работы с конспектированием своих действий, а также фотофиксацией контрольных точек в отчете о практической работе.',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.teal,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+  }
+}
