@@ -54,7 +54,7 @@ class _ScreenSwitcherState extends State<ScreenSwitcher> {
 
   List<Widget> get screens => [
     LoginScreen(onSave: saveLoginData),
-    // SignInScreen(onSave: saveSignInData),
+    SignInScreen(onSave: saveSignInData),
     // DisplayScreen(login: login, password: password),
     // LoadDataScreen(status: loadStatus, onLoad: () => loadData(0)),
     // AboutAppScreen(),
@@ -158,3 +158,65 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
+
+class SignInScreen extends StatefulWidget {
+  final void Function(String, String, String) onSave;
+  const SignInScreen({required this.onSave});
+  @override
+  _SignInScreenState createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController loginController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    loginController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 16),
+        Text("Регистрация", style: TextStyle(fontSize: 32)),
+        SizedBox(height: 64),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 8),
+          child: TextField(
+            controller: emailController,
+            decoration: InputDecoration(border: OutlineInputBorder(), labelText: 'Почта'),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 8),
+          child: TextField(
+            controller: loginController,
+            decoration: InputDecoration(border: OutlineInputBorder(), labelText: 'Логин'),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 8),
+          child: TextField(
+            controller: passwordController,
+            decoration: InputDecoration(border: OutlineInputBorder(), labelText: 'Пароль'),
+            obscureText: true,
+          ),
+        ),
+        SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: () {
+            widget.onSave(emailController.text, loginController.text, passwordController.text);
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Данные сохранены')));
+          },
+          child: Text('Сохранить'),
+        ),
+      ],
+    );
+  }
+}
