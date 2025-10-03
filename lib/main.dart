@@ -56,7 +56,7 @@ class _ScreenSwitcherState extends State<ScreenSwitcher> {
     LoginScreen(onSave: saveLoginData),
     SignInScreen(onSave: saveSignInData),
     DisplayScreen(login: login, password: password),
-    // LoadDataScreen(status: loadStatus, onLoad: () => loadData(0)),
+    LoadDataScreen(status: loadStatus, onLoad: () => loadData(0)),
     // AboutAppScreen(),
   ];
 
@@ -241,3 +241,25 @@ class DisplayScreen extends StatelessWidget {
       );
   }
 }
+
+class LoadDataScreen extends StatelessWidget {
+  final String status;
+  final VoidCallback onLoad;
+  const LoadDataScreen({required this.status, required this.onLoad});
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Загрузка данных',
+              style: TextStyle(fontSize: 24),
+          ),
+          SizedBox(height: 20),
+          Text('Статус: $status', style: TextStyle(fontSize: 18)),
+          SizedBox(height: 20),
+          ElevatedButton(onPressed: onLoad, child: Text('Загрузить данные')),
+        ],
+      );
+  }
+}
+
